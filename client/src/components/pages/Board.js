@@ -6,7 +6,7 @@ import Wait from '../functional/Wait'
 import Status from '../functional/Status'
 import ScoreBoard from '../functional/ScoreBoard'
 import PlayAgain from '../functional/PlayAgain'
-
+import WinnerModal from '../WinnerModal'
 import io from 'socket.io-client'
 import qs from 'qs'
 const ENDPOINT = 'http://localhost:5000'
@@ -21,6 +21,7 @@ class Board extends Component {
       end: false,
       room: '',
       statusMessage: '',
+      showModal:false,
       currentPlayerScore: 0,
       opponentPlayer: [],
       //State to check when a new user join
@@ -93,12 +94,13 @@ class Board extends Component {
     this.setBoard(gameState)
     if (this.socketID === id){
       const playerScore = this.state.currentPlayerScore + 1
-      this.setState({currentPlayerScore:playerScore, statusMessage:'You Win'})
+      this.setState({currentPlayerScore:playerScore, statusMessage:'You Win',showModal:true})
+  
     }else{
       const opponentScore = this.state.opponentPlayer[1] + 1
       const opponent = this.state.opponentPlayer
       opponent[1] = opponentScore
-      this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`})
+      this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`,showModal:true})
     }
     this.setState({end:true})
   }
@@ -162,9 +164,13 @@ class Board extends Component {
         const newSquare = this.renderSquare(i)
         squareArray.push(newSquare)
       }
+      const updateModalState=()=>{
+        this.setState({showModal:false})
+      }
       return(
         <>
           <Wait display={this.state.waiting} room={this.state.room}/>
+          {this.state.showModal&&<WinnerModal setShowModal={updateModalState} message={this.state.statusMessage} PlayAgain={this.playAgainRequest}/>}
           <Status message={this.state.statusMessage}/>
           <div className="board">
             {squareArray}

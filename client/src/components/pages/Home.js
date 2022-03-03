@@ -59,14 +59,15 @@ const Home = () => {
               </div>
             </div></Link>
 
-            <div className="game-card">
+           <Link to="/local"> <div className="game-card">
               <div className="icon">
                 <AiFillRobot/>
               </div>
               <div className="text">
                 <h2>Local Player</h2>
               </div>
-            </div>
+            </div></Link>
+
         </div>
      </div>
     </div>

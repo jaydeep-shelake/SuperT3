@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 
 import SquareComponent from "./modules/SquareComponent";
 import './index.css';
+import WinnerModal from '../WinnerModal';
 const clearState = ["", "", "", "", "", "", "", "", "", ""];
 
 function NewGame() {
     const [gameState, updateGameState] = useState(clearState)
     const [isXChance, updateIsXChance] = useState(false)
-
-   
+   const [getWinner ,setWinner]=useState(null)
+   const [showModal,setShowModal]=useState(false)
     const onUserClicked = (index) => {
         let strings = Array.from(gameState);
         if (strings[index])
@@ -20,11 +21,13 @@ function NewGame() {
 
     const clearGame = () => {
         updateGameState(clearState)
+        setShowModal(false)
     }
     useEffect(() => {
         let winner = checkWinner();
         if (winner) {
-            alert(`Ta da ! ${winner} won the Game !`)
+          setWinner(winner)
+          setShowModal(true)
             // clearGame();
         }
     }, [gameState])
@@ -51,7 +54,8 @@ function NewGame() {
 
     return (
         <div className="app-header">
-            
+            {(getWinner&&showModal)&&<WinnerModal winner={getWinner} clearGame={clearGame} clearState={clearState}
+            setShowModal={setShowModal}/>}
             <div className="row jc-center">
                 <SquareComponent className="b-bottom-right" onClick={() => onUserClicked(0)} state={gameState[0]}/>
                 <SquareComponent className="b-bottom-right" onClick={() => onUserClicked(1)} state={gameState[1]}/>

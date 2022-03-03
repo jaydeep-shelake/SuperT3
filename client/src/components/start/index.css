@@ -72,16 +72,16 @@ code {
 }
 
 .b-bottom-right {
-  border-right: 6px solid #0f0f0f;
-  border-bottom: 6px solid #0f0f0f;
+  border-right: 12px solid #0f0f0f;
+  border-bottom: 12px solid #0f0f0f;
 }
 
 .b-bottom {
-  border-bottom: 6px solid #0f0f0f;
+  border-bottom: 12px solid #0f0f0f;
 }
 
 .b-right {
-  border-right: 6px solid #0f0f0f;
+  border-right: 12px solid #0f0f0f;
 }
 
 .clear-button {
