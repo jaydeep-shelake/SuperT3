@@ -14,24 +14,15 @@ const WinnerModal = ({winner,startNewGame,clearGame,clearState,setShowModal,mess
   return (
     <div className='black-screen'>
         <div className="modal">
-           { 
-           message?(
-             <div className='text-msg'>
-                 {message}
-             </div>
-           ):(
-             <>
+          
             <div className="square" style={{background:'rgb(18, 18, 18)',border:'none',borderRadius:'6px'}}>
             {winner==='X'?<X/>:<O/>}
           </div>
            <h2>Is Winner !</h2>
-           </>
-           )
-           
-            }
+      
            
 
-            {message?<button onClick={playAgainGame}>Play Again</button>:<button onClick={clearState?resetGame:()=>startNewGame()}>Restart</button>}
+            <button onClick={clearState?resetGame:()=>startNewGame()}>Restart</button>
         </div>
     </div>
   )

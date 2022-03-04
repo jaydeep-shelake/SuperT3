@@ -170,13 +170,13 @@ class Board extends Component {
       return(
         <>
           <Wait display={this.state.waiting} room={this.state.room}/>
-          {this.state.showModal&&<WinnerModal setShowModal={updateModalState} message={this.state.statusMessage} PlayAgain={this.playAgainRequest}/>}
+          {/* {this.state.showModal&&<WinnerModal setShowModal={updateModalState} message={this.state.statusMessage} PlayAgain={this.playAgainRequest}/>} */}
           <Status message={this.state.statusMessage}/>
           <div className="board">
             {squareArray}
           </div>
           <ScoreBoard data={{player1:['You', this.state.currentPlayerScore], player2:[this.state.opponentPlayer[0], this.state.opponentPlayer[1]]}}/>
-          <PlayAgain end={this.state.end} onClick={this.playAgainRequest}/>
+          <PlayAgain end={this.state.end} onClick={this.playAgainRequest} message={this.state.statusMessage}/>
         </>
       )
     }
