@@ -14,16 +14,58 @@
   z-index: 1;
   box-shadow: 3px 3px 6px #000;
   background: #090909;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar .logo {
+  margin-bottom: 40px;
+}
+.sidebar .logo img {
+  width: 50px;
+  height: 50px;
 }
 .main-area {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   background: #090909;
 
   padding: 30px;
+}
+.game-log {
+  width: 10%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #090909;
+}
+.game-log .header {
+  padding: 30px 10px;
+}
+.game-log .header button {
+  padding: 8px 20px;
+  font-size: 16px;
+  color: #fff;
+  box-shadow: 2px 4px 10px rgba(146, 23, 23, 0.445);
+  cursor: pointer;
+}
+.profile-log {
+  background: rgb(179, 31, 31);
+  color: #fff;
+  font-size: 25px;
+  padding: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .banner {
   width: 60%;
@@ -47,7 +89,7 @@
 .home .spider {
   position: absolute;
   top: 1rem;
-  right: 20%;
+  right: 26%;
   z-index: 999;
   width: 35vw;
   max-width: 400px;

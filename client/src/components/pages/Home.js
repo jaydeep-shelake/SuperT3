@@ -4,12 +4,21 @@ import { Link } from 'react-router-dom'
 import spiderman from '../../assets/spiderman.png'
 import {AiFillPlayCircle} from 'react-icons/ai'
 import {FaUsersCog} from 'react-icons/fa'
+import {FiLogOut} from 'react-icons/fi'
 import {AiFillSetting,AiFillRobot,AiFillHome} from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
+import logo from '../../assets/spidermanlogo.png'
+import { logout } from '../../actions'
 const Home = () => {
+  const user = useSelector(state=>state.user?.user)
+  const dispatch=useDispatch()
   return (
     <div className='home'>
      <div className="sidebar">
            <div className="links">
+             <div className="logo">
+             <img src={logo} alt="logo" />
+             </div>
              <div className="link active">
                <AiFillHome/>
              </div>
@@ -26,6 +35,11 @@ const Home = () => {
                <AiFillSetting/>
              </div>
            </div>
+           <div className="links">
+           <div className="link" onClick={()=>dispatch(logout())}>
+               <FiLogOut/>
+             </div>
+             </div>
      </div>
      <div className="main-area">
      <img className='spider' src={spiderman} alt="" />
@@ -70,6 +84,14 @@ const Home = () => {
 
         </div>
      </div>
+     <div className="game-log">
+       <div className="header">
+         {user?<div className='profile-log'>{user?.name.charAt(0)}</div>:<Link to="/signin"><button>Login</button></Link>}
+        </div>
+        <div className="all-log">
+          
+          </div>
+      </div>
     </div>
   )
 }

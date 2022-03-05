@@ -6,17 +6,27 @@ const Board = require('./utilities/board')
 const cors = require('cors')
 //set up express server
 const express = require('express')
+const mongoose =  require('mongoose')
 const http = require('http')
 const socketio = require('socket.io')
-
+const userRouter = require('./routes/userRouter')
 const PORT = process.env.PORT || 5000
 
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-app.use(cors())
+app.use(express.json())  // to parse body in json format (body parser)
+app.use(express.urlencoded({extended:true}))
+const uri ="mongodb+srv://Jaydeep-shelake:Pass%40123@cluster0.dvyoz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+mongoose.connect(uri,
+    err => {
+        if(err) throw err;
+        console.log('connected...')
+    });
 
+app.use(cors())
+app.use('/api/users',userRouter)
 //Store the room ids mapping to the room property object 
 //The room property object looks like this {roomid:str, players:Array(2)}
 const rooms = new Map()
@@ -185,6 +195,10 @@ io.on('connection', socket =>{
             }
         }
     })        
+})
+
+app.use((err,req,res,next)=>{
+    res.status(500).send({message:err.message})
 })
 
 
