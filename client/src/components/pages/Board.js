@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom'
-
+import {connect} from 'react-redux'
 import Square from '../functional/Square';
 import Wait from '../functional/Wait'
 import Status from '../functional/Status'
 import ScoreBoard from '../functional/ScoreBoard'
 import PlayAgain from '../functional/PlayAgain'
-import WinnerModal from '../WinnerModal'
 import io from 'socket.io-client'
 import qs from 'qs'
+import {saveWinner} from '../../actions'
 const ENDPOINT = 'http://localhost:5000'
 
 class Board extends Component {
@@ -95,12 +95,18 @@ class Board extends Component {
     if (this.socketID === id){
       const playerScore = this.state.currentPlayerScore + 1
       this.setState({currentPlayerScore:playerScore, statusMessage:'You Win',showModal:true})
+      if(this.props.user){
+        this.props.saveWinner(this.props.name,this.state.opponentPlayer[0])
+      }
   
     }else{
       const opponentScore = this.state.opponentPlayer[1] + 1
       const opponent = this.state.opponentPlayer
       opponent[1] = opponentScore
       this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`,showModal:true})
+      if(this.props.user){
+        this.props.saveWinner(this.state.opponentPlayer[0],this.props.name)
+      }
     }
     this.setState({end:true})
   }
@@ -183,8 +189,11 @@ class Board extends Component {
   }
 }
 
+const mapStateToProps=(state)=>{
+  return{user:state.user?.user,name:state.currentUser.name}
+}
 
-export default Board
+export default connect(mapStateToProps,{saveWinner})(Board)
 
 
 

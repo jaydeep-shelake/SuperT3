@@ -4,3 +4,6 @@ export const SIGNUP_REQUEST = "SIGNIN_REQUEST";
 export const SIGNUP = "SIGNUP";
 export const LOGOUT = "LOGOUT";
 export const AUTH_ERROR = "AUTH_ERROR";
+export const SAVE_GAME_LOG="SAVE_GAME_LOG";
+export const SAVE_GAME_LOG_ERROR="SAVE_GAME_LOG_ERROR";
+export const GET_USER="GET_USER"

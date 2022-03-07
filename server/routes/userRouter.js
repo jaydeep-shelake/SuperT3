@@ -2,7 +2,8 @@ const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcrypt')
 const expressAsyncHandler = require('express-async-handler')
-const {genrateToken} = require('../utilities/utils')
+const {genrateToken, isAuth} = require('../utilities/utils');
+const GameLog = require('../models/gameLogs');
 const userRouter = express.Router();
 // post request for signining users
 userRouter.post('/signin',expressAsyncHandler(async(req,res)=>{
@@ -47,5 +48,16 @@ userRouter.post('/signin',expressAsyncHandler(async(req,res)=>{
    })
    
    );
+
+//post route for saving game log
+userRouter.post('/gameLog',expressAsyncHandler(async(req,res)=>{
+        const newlog = new GameLog({
+                winnerName:req.body.winnerName,
+                loserName:req.body.loserName,
+                userId:req.body.userId
+        })
+        const gameLog= await newlog.save()
+        res.send(gameLog)
+}))
    
 module.exports=userRouter;

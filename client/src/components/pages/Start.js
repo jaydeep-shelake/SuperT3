@@ -5,9 +5,9 @@ import InputForm from '../functional/InputForm.js'
 import Loading from '../functional/Loading'
 import Error from '../functional/Error'
 import logo from './logo.png'
-
+import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom'
-
+import { getCurrenUserName } from '../../actions/index.js';
 import socketIOClient from 'socket.io-client'
 const ENDPOINT = 'http://localhost:5000'
 
@@ -60,6 +60,7 @@ class Start extends React.Component {
 
     onSubmit = ()=>{
         this.setState({loading: true})
+        this.props.getCurrenUserName(this.state.name)
         if (this.validate()){
             if (this.state.newGame){
                 this.socket.emit('newGame')
@@ -127,5 +128,5 @@ class Start extends React.Component {
     
 }
 
-export default Start;
+export default connect(null,{getCurrenUserName})(Start);
 
