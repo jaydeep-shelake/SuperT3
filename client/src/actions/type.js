@@ -7,3 +7,4 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const SAVE_GAME_LOG="SAVE_GAME_LOG";
 export const SAVE_GAME_LOG_ERROR="SAVE_GAME_LOG_ERROR";
 export const GET_USER="GET_USER"
+export const GET_GAME_LOGS ="GET_GAME_LOGS"

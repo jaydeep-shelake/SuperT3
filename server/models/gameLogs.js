@@ -1,19 +1,34 @@
 const mongoose = require('mongoose')
 
 const GameLog = new mongoose.Schema({
-    winnerName:{
+    currenPlayer:{
+        name:{
         type:String,
-        required:true
-    },
-    loserName:{
-        type:String,
-        required:true
+            required:true
+        },
+        winner:{
+            type:Boolean,
+            required:true
+            
+        }
         
+    },
+    opponent:{
+        name:{
+            type:String,
+            required:true
+            },
+            winner:{
+                type:Boolean,
+            required:true
+                
+            }
     },
     draw:{
         type:Boolean,
-        default:false
+        required:true
     },
+   
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',

@@ -2,7 +2,6 @@
 const {randRoom, randPiece} = require('./utilities/utils')
 const Player = require('./utilities/player')
 const Board = require('./utilities/board')
-
 const cors = require('cors')
 //set up express server
 const express = require('express')
@@ -11,7 +10,7 @@ const http = require('http')
 const socketio = require('socket.io')
 const userRouter = require('./routes/userRouter')
 const PORT = process.env.PORT || 5000
-
+const path = require('path');
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
@@ -197,9 +196,26 @@ io.on('connection', socket =>{
     })        
 })
 
+//Serve static assests if in production
+app.use(express.static(path.join(__dirname, '../client/build')))
+if(process.env.NODE_ENV==='production'){
+    //set a static folder
+    app.get('*', (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, '../client', 'build', 'index.html')
+    )
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....');
+  });
+}
+
+
 app.use((err,req,res,next)=>{
     res.status(500).send({message:err.message})
 })
+
 
 
 server.listen(PORT, ()=>console.log(`Listening on port ${PORT}`))

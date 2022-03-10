@@ -31,13 +31,13 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: 90%;
+  width: 80%;
   background: #090909;
 
   padding: 30px;
 }
 .game-log {
-  width: 10%;
+  width: 20%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -68,7 +68,7 @@
   justify-content: center;
 }
 .banner {
-  width: 60%;
+  width: 70%;
   height: 300px;
   border-radius: 10px;
   background: #fff;
@@ -89,7 +89,7 @@
 .home .spider {
   position: absolute;
   top: 1rem;
-  right: 26%;
+  right: 30%;
   z-index: 999;
   width: 35vw;
   max-width: 400px;
@@ -172,4 +172,62 @@
 .link.active {
   background: rgba(146, 23, 23, 0.13);
   transition: all 0.3s ease-in-out;
+}
+.game-log-card {
+  width: 90%;
+  padding: 10px;
+  background: rgb(23 23 23);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+.game-log-card .game-pro-icon {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.log-title {
+  width: 100%;
+  margin: 10px 0px 20px 0px;
+  color: rgb(161, 160, 160);
+}
+.game-log-card p {
+  color: #fff;
+  font-size: 17px;
+}
+.game-log-card span {
+  color: rgb(151, 150, 150);
+  font-size: 13px;
+  margin-left: 10px;
+}
+.game-log-card .game-pro-icon p {
+  width: 40px;
+  height: 40px;
+  background: rgb(179, 31, 31);
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.all-log {
+  width: 100%;
+}
+.game-button {
+  width: 100%;
+  margin-top: 30px;
+}
+.game-button button {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-button button svg {
+  margin-left: 10px;
+  font-size: 18px;
 }

@@ -49,12 +49,20 @@ userRouter.post('/signin',expressAsyncHandler(async(req,res)=>{
    
    );
 
+//get route 
+
+userRouter.get('/gameLog',expressAsyncHandler(async(req,res)=>{
+      const allGameLogs = await GameLog.find({userId:req.query.userId})
+      res.send(allGameLogs)
+}))
+
 //post route for saving game log
 userRouter.post('/gameLog',expressAsyncHandler(async(req,res)=>{
         const newlog = new GameLog({
-                winnerName:req.body.winnerName,
-                loserName:req.body.loserName,
-                userId:req.body.userId
+                currenPlayer:req.body.winnerName,
+                opponent:req.body.loserName,
+                userId:req.body.userId,
+                draw:req.body.draw
         })
         const gameLog= await newlog.save()
         res.send(gameLog)

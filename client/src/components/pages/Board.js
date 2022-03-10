@@ -24,6 +24,7 @@ class Board extends Component {
       showModal:false,
       currentPlayerScore: 0,
       opponentPlayer: [],
+      winnerId:'',
       //State to check when a new user join
       waiting: false,
       joinError: false
@@ -94,18 +95,19 @@ class Board extends Component {
     this.setBoard(gameState)
     if (this.socketID === id){
       const playerScore = this.state.currentPlayerScore + 1
-      this.setState({currentPlayerScore:playerScore, statusMessage:'You Win',showModal:true})
+      this.setState({currentPlayerScore:playerScore, statusMessage:'You Win',showModal:true,winnerId:this.props.user._id})
       if(this.props.user){
-        this.props.saveWinner(this.props.name,this.state.opponentPlayer[0])
+        this.props.saveWinner({name:this.props.name,winner:true},{name:this.state.opponentPlayer[0],winner:false},false)
       }
   
     }else{
+      
       const opponentScore = this.state.opponentPlayer[1] + 1
       const opponent = this.state.opponentPlayer
       opponent[1] = opponentScore
-      this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`,showModal:true})
+      this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`,showModal:true,winnerId:this.props.user._id})
       if(this.props.user){
-        this.props.saveWinner(this.state.opponentPlayer[0],this.props.name)
+        this.props.saveWinner({name:this.props.name,winner:false},{name:this.state.opponentPlayer[0],winner:true},false)
       }
     }
     this.setState({end:true})
@@ -115,6 +117,8 @@ class Board extends Component {
   handleDraw(gameState){
     this.setBoard(gameState)
     this.setState({end:true, statusMessage:'Draw'})
+    this.props.saveWinner({name:this.props.name,winner:false},{name:this.state.opponentPlayer[0],winner:false},true)
+
   }
 
   playAgainRequest = () => {

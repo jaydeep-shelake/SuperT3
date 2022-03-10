@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import '../../styles/home.css'
 import { Link } from 'react-router-dom'
 import spiderman from '../../assets/spiderman.png'
@@ -7,30 +7,37 @@ import {FaUsersCog} from 'react-icons/fa'
 import {FiLogOut} from 'react-icons/fi'
 import {AiFillSetting,AiFillRobot,AiFillHome} from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
+import{BsFillArrowRightCircleFill} from 'react-icons/bs'
 import logo from '../../assets/spidermanlogo.png'
-import { logout } from '../../actions'
+import { getGameLogs, logout } from '../../actions'
+import GamelogCard from '../GamelogCard'
 const Home = () => {
   const user = useSelector(state=>state.user?.user)
+  const gameLogs = useSelector(state=>state.gameLogs.logs)
   const dispatch=useDispatch()
+
+  useEffect(()=>{
+   dispatch(getGameLogs(user?._id))
+  },[])
   return (
     <div className='home'>
      <div className="sidebar">
            <div className="links">
-             <div className="logo">
+           <Link to="/"><div className="logo">
              <img src={logo} alt="logo" />
-             </div>
-             <div className="link active">
+             </div></Link>
+             <Link to="/"><div className="link active">
                <AiFillHome/>
-             </div>
-             <div className="link">
+             </div></Link>
+             <Link to="/new-game"><div className="link">
                <AiFillPlayCircle/>
-             </div>
-             <div className="link">
+             </div></Link>
+             <Link to="/start"><div className="link">
                <FaUsersCog/>
-             </div>
-             <div className="link">
+             </div></Link>
+             <Link to="/local"><div className="link">
                <AiFillRobot/>
-             </div>
+             </div></Link>
              <div className="link">
                <AiFillSetting/>
              </div>
@@ -88,10 +95,28 @@ const Home = () => {
        <div className="header">
          {user?<div className='profile-log'>{user?.name.charAt(0)}</div>:<Link to="/signin"><button>Login</button></Link>}
         </div>
-        <div className="all-log">
+        <div className="log-title">
+        <h2>Past Game Logs</h2>
           
           </div>
+        <div className="all-log">
+          { user&&(
+            gameLogs?.map((game)=>(
+              <GamelogCard
+              game={game}
+              user={user}
+              key={user?._id}
+              />
+
+            ))
+          )
+          }
+          </div>
+          <div className="game-button">
+        <button>View All <BsFillArrowRightCircleFill/> </button>
+        </div>
       </div>
+      
     </div>
   )
 }
