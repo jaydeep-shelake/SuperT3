@@ -9,7 +9,7 @@ import PlayAgain from '../functional/PlayAgain'
 import io from 'socket.io-client'
 import qs from 'qs'
 import {saveWinner} from '../../actions'
-const ENDPOINT = 'http://localhost:5000'
+const ENDPOINT = 'https://supert3.herokuapp.com'
 
 class Board extends Component {
   constructor(props){

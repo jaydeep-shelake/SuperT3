@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom'
 import { getCurrenUserName } from '../../actions/index.js';
 import socketIOClient from 'socket.io-client'
-const ENDPOINT = 'http://localhost:5000'
+const ENDPOINT = 'https://supert3.herokuapp.com'
 
 class Start extends React.Component {
     constructor(props){
