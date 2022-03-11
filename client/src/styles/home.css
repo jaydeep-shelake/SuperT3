@@ -231,3 +231,10 @@
   margin-left: 10px;
   font-size: 18px;
 }
+.owner {
+  color: rgb(129, 129, 129);
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 40%;
+}

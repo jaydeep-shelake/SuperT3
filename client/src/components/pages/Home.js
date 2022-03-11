@@ -93,7 +93,11 @@ const Home = () => {
             </div></Link>
 
         </div>
+        <div className="owner">
+          <p>Made with ⚡ by Jaydeep Shelake</p>
+        </div>
      </div>
+
      <div className="game-log">
        <div className="header">
          {user?<div className='profile-log'>{user?.name.charAt(0)}</div>:<Link to="/signin"><button>Login</button></Link>}
