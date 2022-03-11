@@ -17,7 +17,10 @@ const Home = () => {
   const dispatch=useDispatch()
 
   useEffect(()=>{
-   dispatch(getGameLogs(user?._id))
+    if(user)
+    {
+      dispatch(getGameLogs(user?._id))
+    }
   },[])
   return (
     <div className='home'>

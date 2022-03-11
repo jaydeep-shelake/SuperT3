@@ -24,7 +24,6 @@ class Board extends Component {
       showModal:false,
       currentPlayerScore: 0,
       opponentPlayer: [],
-      winnerId:'',
       //State to check when a new user join
       waiting: false,
       joinError: false
@@ -95,7 +94,8 @@ class Board extends Component {
     this.setBoard(gameState)
     if (this.socketID === id){
       const playerScore = this.state.currentPlayerScore + 1
-      this.setState({currentPlayerScore:playerScore, statusMessage:'You Win',showModal:true,winnerId:this.props.user._id})
+      this.setState({currentPlayerScore:playerScore, statusMessage:'You Win',showModal:true})
+      console.log(this.state.statusMessage)
       if(this.props.user){
         this.props.saveWinner({name:this.props.name,winner:true},{name:this.state.opponentPlayer[0],winner:false},false)
       }
@@ -105,7 +105,9 @@ class Board extends Component {
       const opponentScore = this.state.opponentPlayer[1] + 1
       const opponent = this.state.opponentPlayer
       opponent[1] = opponentScore
-      this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`,showModal:true,winnerId:this.props.user._id})
+      this.setState({opponentPlayer:opponent, statusMessage:`${this.state.opponentPlayer[0]} Wins`,showModal:true})
+      console.log(this.state.statusMessage)
+
       if(this.props.user){
         this.props.saveWinner({name:this.props.name,winner:false},{name:this.state.opponentPlayer[0],winner:true},false)
       }
